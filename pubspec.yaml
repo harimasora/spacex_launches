@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # UUID
+  uuid: ^3.0.4
+
   # Equality
   freezed_annotation: ^0.14.2
   json_annotation: ^4.1.0

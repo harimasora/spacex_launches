@@ -7,4 +7,5 @@ abstract class Failure {}
 @freezed
 class ValueFailure<T> extends Failure with _$ValueFailure<T> {
   const factory ValueFailure.unexpected({required T failedValue}) = _Unexpected<T>;
+  const factory ValueFailure.invalidUrl({required T failedValue}) = _InvalidUrl<T>;
 }

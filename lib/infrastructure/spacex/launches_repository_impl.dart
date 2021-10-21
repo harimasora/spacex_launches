@@ -33,12 +33,12 @@ query launches {
 }
 ''';
 
-    final response = await _client.query(QueryOptions(document: gql(listQueryString), variables: {}));
+    final response = await _client.query(QueryOptions(document: gql(listQueryString)));
 
     if (response.data != null) {
-      final launchesList = (response.data!['launches'] as List).map((launchJson) {
-        return LaunchDTO.fromGraphQL(launchJson).toDomain();
-      }).toList();
+      final launchesList = (response.data!['launches'] as List)
+          .map((dynamic launchJson) => LaunchDTO.fromGraphQL(launchJson as Map<String, dynamic>).toDomain())
+          .toList();
       return Either.right(launchesList);
     } else {
       return const Either.right([]);

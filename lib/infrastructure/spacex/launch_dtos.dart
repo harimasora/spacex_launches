@@ -20,7 +20,7 @@ class LaunchDTO with _$LaunchDTO {
   const LaunchDTO._();
 
   factory LaunchDTO.fromGraphQL(Map<String, dynamic> json) {
-    final simplifiedJson = {
+    final simplifiedJson = <String, dynamic>{
       'id': json['id'],
       'name': json['mission_name'],
       'flightNumber': json['id'],

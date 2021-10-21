@@ -39,7 +39,9 @@ query launches {
       final launchesList = (response.data!['launches'] as List)
           .map((dynamic launchJson) => LaunchDTO.fromGraphQL(launchJson as Map<String, dynamic>).toDomain())
           .toList();
-      return Either.right(launchesList);
+
+      return Either.right(
+          launchesList..sort((a, b) => int.parse(a.id.getOrCrash()).compareTo(int.parse(b.id.getOrCrash()))));
     } else {
       return const Either.right([]);
     }

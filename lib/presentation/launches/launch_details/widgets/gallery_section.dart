@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_launches/domain/spacex/value_objects.dart';
 
-Color contentTextColor = Color(0xff868686);
-
 class GallerySection extends StatelessWidget {
   const GallerySection({required this.images, Key? key}) : super(key: key);
 

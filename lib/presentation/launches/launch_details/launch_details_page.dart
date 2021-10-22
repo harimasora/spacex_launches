@@ -2,14 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_launches/domain/spacex/launch.dart';
 import 'package:spacex_launches/presentation/launches/launch_details/widgets/gallery_section.dart';
-
-Color primaryTextColor = Color(0xFF414C6B);
-Color secondaryTextColor = Color(0xFFE4979E);
-Color titleTextColor = Colors.white;
-Color contentTextColor = Color(0xff868686);
-Color navigationColor = Color(0xFF6751B5);
-Color gradientStartColor = Color(0xFF0050AC);
-Color gradientEndColor = Color(0xFF9354B9);
+import 'package:spacex_launches/presentation/launches/misc/constants.dart';
 
 class LaunchDetailsPage extends StatelessWidget {
   const LaunchDetailsPage({required this.launch, Key? key}) : super(key: key);
@@ -37,11 +30,14 @@ class LaunchDetailsPage extends StatelessWidget {
                           children: [
                             Positioned(
                               right: 0,
-                              top: 12,
+                              top: 0,
                               width: 100,
-                              child: CachedNetworkImage(
-                                imageUrl: launch.patchUrl.getOrCrash(),
-                                errorWidget: (context, url, dynamic error) => const Icon(Icons.image_not_supported),
+                              child: Opacity(
+                                opacity: 0.5,
+                                child: CachedNetworkImage(
+                                  imageUrl: launch.patchUrl.getOrCrash(),
+                                  errorWidget: (context, url, dynamic error) => const Icon(Icons.image_not_supported),
+                                ),
                               ),
                             ),
                             Column(
@@ -49,7 +45,7 @@ class LaunchDetailsPage extends StatelessWidget {
                               children: [
                                 Text(
                                   launch.name.getOrCrash(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontFamily: 'Avenir',
                                     fontSize: 56,
                                     color: primaryTextColor,
@@ -59,7 +55,7 @@ class LaunchDetailsPage extends StatelessWidget {
                                 ),
                                 Text(
                                   launch.siteName.getOrCrash(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontFamily: 'Avenir',
                                     fontSize: 31,
                                     color: primaryTextColor,
@@ -77,7 +73,7 @@ class LaunchDetailsPage extends StatelessWidget {
                           launch.details.getOrCrash().isEmpty
                               ? 'This mission has no more details.'
                               : launch.details.getOrCrash(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: 'Avenir',
                             fontSize: 20,
                             color: contentTextColor,

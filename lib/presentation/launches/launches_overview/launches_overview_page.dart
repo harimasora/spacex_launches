@@ -7,7 +7,7 @@ class LaunchesOverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('LaunchesOverviewPage')),
+      appBar: AppBar(title: const Text('Launches Overview')),
       body: const LaunchesList(),
     );
   }

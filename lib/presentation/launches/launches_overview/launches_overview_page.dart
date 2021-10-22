@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spacex_launches/presentation/launches/widgets/launches_list.dart';
+import 'package:spacex_launches/presentation/launches/launches_overview/widgets/launches_list.dart';
 
 class LaunchesOverviewPage extends StatelessWidget {
   const LaunchesOverviewPage({Key? key}) : super(key: key);

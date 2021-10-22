@@ -67,7 +67,7 @@ class LaunchDetails extends ValueObject<String> {
   final Either<ValueFailure<String>, String> value;
 
   factory LaunchDetails(String input) {
-    return LaunchDetails._(validateUrl(input));
+    return LaunchDetails._(Either.right(input));
   }
 
   const LaunchDetails._(this.value);

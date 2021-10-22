@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spacex_launches/application/spacex/launch_watcher/launch_watcher_bloc.dart';
+import 'package:spacex_launches/presentation/launches/launches_overview/widgets/launch_list_tile.dart';
 
 class LaunchesList extends StatelessWidget {
   const LaunchesList({Key? key}) : super(key: key);
@@ -14,20 +15,7 @@ class LaunchesList extends StatelessWidget {
           loadInProgress: () => const Center(child: CircularProgressIndicator()),
           loadSuccess: (launches) => ListView.separated(
             itemCount: launches.length,
-            itemBuilder: (context, index) {
-              final launch = launches[index];
-              return ListTile(
-                leading: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: launch.patchUrl.value.when(left: (l) => Container(), right: (r) => Image.network(r)),
-                ),
-                title: Text(launch.name.getOrCrash()),
-                subtitle: Text(launch.launchDate.getOrCrash().toString()),
-                trailing: Text(launch.flightNumber.getOrCrash()),
-                onTap: null,
-              );
-            },
+            itemBuilder: (context, index) => LaunchListTile(launch: launches[index]),
             separatorBuilder: (context, index) => const Divider(),
           ),
           loadFailure: (f) => Center(

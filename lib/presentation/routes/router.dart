@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:spacex_launches/presentation/home/home_page.dart';
-import 'package:spacex_launches/presentation/launches/launches_overview_page.dart';
+import 'package:spacex_launches/presentation/launches/launch_details/launch_details_page.dart';
+import 'package:spacex_launches/presentation/launches/launches_overview/launches_overview_page.dart';
 import 'package:spacex_launches/presentation/settings/settings_page.dart';
 
 @MaterialAutoRouter(
@@ -16,6 +17,7 @@ import 'package:spacex_launches/presentation/settings/settings_page.dart';
           page: EmptyRouterPage,
           children: [
             AutoRoute<dynamic>(path: '', page: LaunchesOverviewPage),
+            AutoRoute<dynamic>(page: LaunchDetailsPage),
             RedirectRoute(path: '*', redirectTo: ''),
           ],
         ),

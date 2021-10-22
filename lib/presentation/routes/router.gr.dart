@@ -9,14 +9,16 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i5;
+import 'package:flutter/material.dart' as _i6;
 
+import '../../domain/spacex/launch.dart' as _i7;
 import '../home/home_page.dart' as _i1;
-import '../launches/launches_overview_page.dart' as _i3;
-import '../settings/settings_page.dart' as _i4;
+import '../launches/launch_details/launch_details_page.dart' as _i4;
+import '../launches/launches_overview/launches_overview_page.dart' as _i3;
+import '../settings/settings_page.dart' as _i5;
 
 class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey])
+  AppRouter([_i6.GlobalKey<_i6.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -37,9 +39,15 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i3.LaunchesOverviewPage());
     },
+    LaunchDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<LaunchDetailsRouteArgs>();
+      return _i2.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i4.LaunchDetailsPage(launch: args.launch, key: args.key));
+    },
     SettingsRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i4.SettingsPage());
+          routeData: routeData, child: const _i5.SettingsPage());
     }
   };
 
@@ -52,6 +60,8 @@ class AppRouter extends _i2.RootStackRouter {
               children: [
                 _i2.RouteConfig(LaunchesOverviewRoute.name,
                     path: '', parent: LaunchesRouter.name),
+                _i2.RouteConfig(LaunchDetailsRoute.name,
+                    path: 'launch-details-page', parent: LaunchesRouter.name),
                 _i2.RouteConfig('*#redirect',
                     path: '*',
                     parent: LaunchesRouter.name,
@@ -105,7 +115,25 @@ class LaunchesOverviewRoute extends _i2.PageRouteInfo<void> {
   static const String name = 'LaunchesOverviewRoute';
 }
 
-/// generated route for [_i4.SettingsPage]
+/// generated route for [_i4.LaunchDetailsPage]
+class LaunchDetailsRoute extends _i2.PageRouteInfo<LaunchDetailsRouteArgs> {
+  LaunchDetailsRoute({required _i7.Launch launch, _i6.Key? key})
+      : super(name,
+            path: 'launch-details-page',
+            args: LaunchDetailsRouteArgs(launch: launch, key: key));
+
+  static const String name = 'LaunchDetailsRoute';
+}
+
+class LaunchDetailsRouteArgs {
+  const LaunchDetailsRouteArgs({required this.launch, this.key});
+
+  final _i7.Launch launch;
+
+  final _i6.Key? key;
+}
+
+/// generated route for [_i5.SettingsPage]
 class SettingsRoute extends _i2.PageRouteInfo<void> {
   const SettingsRoute() : super(name, path: '');
 

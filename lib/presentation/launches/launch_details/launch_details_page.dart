@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_launches/domain/spacex/launch.dart';
 import 'package:spacex_launches/presentation/launches/launch_details/widgets/gallery_section.dart';
@@ -38,7 +39,10 @@ class LaunchDetailsPage extends StatelessWidget {
                               right: 0,
                               top: 12,
                               width: 100,
-                              child: Image.network(launch.patchUrl.getOrCrash()),
+                              child: CachedNetworkImage(
+                                imageUrl: launch.patchUrl.getOrCrash(),
+                                errorWidget: (context, url, dynamic error) => const Icon(Icons.image_not_supported),
+                              ),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,

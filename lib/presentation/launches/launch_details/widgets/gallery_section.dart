@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:spacex_launches/domain/spacex/value_objects.dart';
 
@@ -41,9 +42,11 @@ class GallerySection extends StatelessWidget {
                       ),
                       child: AspectRatio(
                         aspectRatio: 1,
-                        child: Image.network(
-                          images[index].getOrCrash(),
+                        child: CachedNetworkImage(
+                          imageUrl: images[index].getOrCrash(),
                           fit: BoxFit.cover,
+                          errorWidget: (context, url, dynamic error) =>
+                              const Center(child: Icon(Icons.image_not_supported)),
                         ),
                       ),
                     );

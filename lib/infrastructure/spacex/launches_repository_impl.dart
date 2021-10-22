@@ -1,49 +1,41 @@
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
+import 'package:spacex_launches/domain/core/exceptions.dart';
+import 'package:spacex_launches/domain/core/platform/i_network_info.dart';
 import 'package:spacex_launches/domain/core/value_objects.dart';
+import 'package:spacex_launches/domain/spacex/i_launches_local_data_source.dart';
+import 'package:spacex_launches/domain/spacex/i_launches_remote_data_source.dart';
 import 'package:spacex_launches/domain/spacex/i_launches_repository.dart';
 import 'package:spacex_launches/domain/spacex/spacex_failures.dart';
 import 'package:spacex_launches/domain/spacex/launch.dart';
-import 'package:spacex_launches/infrastructure/spacex/launch_dtos.dart';
+
+import 'package:spacex_launches/locator.dart';
 
 @LazySingleton(as: ILaunchesRepository)
 class LaunchesRepositoryImpl implements ILaunchesRepository {
-  final GraphQLClient _client;
+  final remoteDataSource = locator<ILaunchesRemoteDataSource>();
+  final localDataSource = locator<ILaunchesLocalDataSource>();
+  final networkInfo = locator<INetworkInfo>();
 
-  LaunchesRepositoryImpl(this._client);
+  LaunchesRepositoryImpl();
 
   @override
   Future<Either<SpaceXFailure, List<Launch>>> getLaunches() async {
-    const listQueryString = '''
-query launches {
-  launches {
-    details
-    id
-    launch_date_utc
-    mission_name
-    upcoming
-    links {
-      mission_patch_small
-      flickr_images
-    }
-    launch_site {
-      site_name
-    }
-  }
-}
-''';
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await remoteDataSource.getLaunches();
 
-    final response = await _client.query(QueryOptions(document: gql(listQueryString)));
-
-    if (response.data != null) {
-      final launchesList = (response.data!['launches'] as List)
-          .map((dynamic launchJson) => LaunchDTO.fromGraphQL(launchJson as Map<String, dynamic>).toDomain())
-          .toList();
-
-      return Either.right(
-          launchesList..sort((a, b) => int.parse(a.id.getOrCrash()).compareTo(int.parse(b.id.getOrCrash()))));
+        await localDataSource.cacheLaunches(result);
+        return Either.right(result.map((e) => e.toDomain()).toList());
+      } on ServerException {
+        return const Either.left(SpaceXFailure.serverFailure());
+      }
     } else {
-      return const Either.right([]);
+      try {
+        final cached = await localDataSource.getLastLaunches();
+        return Either.right(cached.map((e) => e.toDomain()).toList());
+      } on CacheException {
+        return const Either.left(SpaceXFailure.cacheFailure());
+      }
     }
   }
 }

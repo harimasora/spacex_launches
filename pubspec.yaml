@@ -12,6 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Local Storage
+  shared_preferences: ^2.0.8
+  cached_network_image: ^3.1.0
+
   # State Management
   flutter_bloc: ^7.3.1
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spacex_launches/domain/spacex/launch.dart';
+import 'package:spacex_launches/presentation/launches/launch_details/widgets/gallery_section.dart';
 
 Color primaryTextColor = Color(0xFF414C6B);
 Color secondaryTextColor = Color(0xFFE4979E);
@@ -53,7 +54,7 @@ class LaunchDetailsPage extends StatelessWidget {
                                   textAlign: TextAlign.left,
                                 ),
                                 Text(
-                                  'Solar System',
+                                  launch.siteName.getOrCrash(),
                                   style: TextStyle(
                                     fontFamily: 'Avenir',
                                     fontSize: 31,
@@ -66,32 +67,12 @@ class LaunchDetailsPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        // Text(
-                        //   launch.name.getOrCrash(),
-                        //   style: TextStyle(
-                        //     fontFamily: 'Avenir',
-                        //     fontSize: 56,
-                        //     color: primaryTextColor,
-                        //     fontWeight: FontWeight.w900,
-                        //   ),
-                        //   textAlign: TextAlign.left,
-                        // ),
-                        // Text(
-                        //   'Solar System',
-                        //   style: TextStyle(
-                        //     fontFamily: 'Avenir',
-                        //     fontSize: 31,
-                        //     color: primaryTextColor,
-                        //     fontWeight: FontWeight.w300,
-                        //   ),
-                        //   textAlign: TextAlign.left,
-                        // ),
                         const Divider(color: Colors.black38),
                         const SizedBox(height: 32),
                         Text(
-                          launch.details.getOrCrash(),
-                          // maxLines: 5,
-                          // overflow: TextOverflow.ellipsis,
+                          launch.details.getOrCrash().isEmpty
+                              ? 'This mission has no more details.'
+                              : launch.details.getOrCrash(),
                           style: TextStyle(
                             fontFamily: 'Avenir',
                             fontSize: 20,
@@ -104,40 +85,7 @@ class LaunchDetailsPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 32.0),
-                    child: Text(
-                      'Gallery',
-                      style: TextStyle(
-                        fontFamily: 'Avenir',
-                        fontSize: 25,
-                        color: Color(0xff47455f),
-                        fontWeight: FontWeight.w300,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Container(
-                    height: 250,
-                    padding: const EdgeInsets.only(left: 32.0),
-                    child: ListView.builder(
-                        itemCount: launch.images.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            clipBehavior: Clip.antiAlias,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            child: AspectRatio(
-                                aspectRatio: 1,
-                                child: Image.network(
-                                  launch.images[index].getOrCrash(),
-                                  fit: BoxFit.cover,
-                                )),
-                          );
-                        }),
-                  ),
+                  GallerySection(images: launch.images),
                 ],
               ),
             ),

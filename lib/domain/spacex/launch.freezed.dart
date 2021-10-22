@@ -24,7 +24,8 @@ class _$LaunchTearOff {
       required LaunchDate launchDate,
       required ImageUrl patchUrl,
       required List<ImageUrl> images,
-      required LaunchDetails details}) {
+      required LaunchDetails details,
+      required SiteName siteName}) {
     return _Launch(
       id: id,
       name: name,
@@ -33,6 +34,7 @@ class _$LaunchTearOff {
       patchUrl: patchUrl,
       images: images,
       details: details,
+      siteName: siteName,
     );
   }
 }
@@ -49,6 +51,7 @@ mixin _$Launch {
   ImageUrl get patchUrl => throw _privateConstructorUsedError;
   List<ImageUrl> get images => throw _privateConstructorUsedError;
   LaunchDetails get details => throw _privateConstructorUsedError;
+  SiteName get siteName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LaunchCopyWith<Launch> get copyWith => throw _privateConstructorUsedError;
@@ -65,7 +68,8 @@ abstract class $LaunchCopyWith<$Res> {
       LaunchDate launchDate,
       ImageUrl patchUrl,
       List<ImageUrl> images,
-      LaunchDetails details});
+      LaunchDetails details,
+      SiteName siteName});
 }
 
 /// @nodoc
@@ -85,6 +89,7 @@ class _$LaunchCopyWithImpl<$Res> implements $LaunchCopyWith<$Res> {
     Object? patchUrl = freezed,
     Object? images = freezed,
     Object? details = freezed,
+    Object? siteName = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -115,6 +120,10 @@ class _$LaunchCopyWithImpl<$Res> implements $LaunchCopyWith<$Res> {
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
               as LaunchDetails,
+      siteName: siteName == freezed
+          ? _value.siteName
+          : siteName // ignore: cast_nullable_to_non_nullable
+              as SiteName,
     ));
   }
 }
@@ -131,7 +140,8 @@ abstract class _$LaunchCopyWith<$Res> implements $LaunchCopyWith<$Res> {
       LaunchDate launchDate,
       ImageUrl patchUrl,
       List<ImageUrl> images,
-      LaunchDetails details});
+      LaunchDetails details,
+      SiteName siteName});
 }
 
 /// @nodoc
@@ -152,6 +162,7 @@ class __$LaunchCopyWithImpl<$Res> extends _$LaunchCopyWithImpl<$Res>
     Object? patchUrl = freezed,
     Object? images = freezed,
     Object? details = freezed,
+    Object? siteName = freezed,
   }) {
     return _then(_Launch(
       id: id == freezed
@@ -182,6 +193,10 @@ class __$LaunchCopyWithImpl<$Res> extends _$LaunchCopyWithImpl<$Res>
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
               as LaunchDetails,
+      siteName: siteName == freezed
+          ? _value.siteName
+          : siteName // ignore: cast_nullable_to_non_nullable
+              as SiteName,
     ));
   }
 }
@@ -196,7 +211,8 @@ class _$_Launch extends _Launch {
       required this.launchDate,
       required this.patchUrl,
       required this.images,
-      required this.details})
+      required this.details,
+      required this.siteName})
       : super._();
 
   @override
@@ -213,10 +229,12 @@ class _$_Launch extends _Launch {
   final List<ImageUrl> images;
   @override
   final LaunchDetails details;
+  @override
+  final SiteName siteName;
 
   @override
   String toString() {
-    return 'Launch(id: $id, name: $name, flightNumber: $flightNumber, launchDate: $launchDate, patchUrl: $patchUrl, images: $images, details: $details)';
+    return 'Launch(id: $id, name: $name, flightNumber: $flightNumber, launchDate: $launchDate, patchUrl: $patchUrl, images: $images, details: $details, siteName: $siteName)';
   }
 
   @override
@@ -239,7 +257,11 @@ class _$_Launch extends _Launch {
             (identical(other.images, images) ||
                 const DeepCollectionEquality().equals(other.images, images)) &&
             (identical(other.details, details) ||
-                const DeepCollectionEquality().equals(other.details, details)));
+                const DeepCollectionEquality()
+                    .equals(other.details, details)) &&
+            (identical(other.siteName, siteName) ||
+                const DeepCollectionEquality()
+                    .equals(other.siteName, siteName)));
   }
 
   @override
@@ -251,7 +273,8 @@ class _$_Launch extends _Launch {
       const DeepCollectionEquality().hash(launchDate) ^
       const DeepCollectionEquality().hash(patchUrl) ^
       const DeepCollectionEquality().hash(images) ^
-      const DeepCollectionEquality().hash(details);
+      const DeepCollectionEquality().hash(details) ^
+      const DeepCollectionEquality().hash(siteName);
 
   @JsonKey(ignore: true)
   @override
@@ -267,7 +290,8 @@ abstract class _Launch extends Launch {
       required LaunchDate launchDate,
       required ImageUrl patchUrl,
       required List<ImageUrl> images,
-      required LaunchDetails details}) = _$_Launch;
+      required LaunchDetails details,
+      required SiteName siteName}) = _$_Launch;
   const _Launch._() : super._();
 
   @override
@@ -284,6 +308,8 @@ abstract class _Launch extends Launch {
   List<ImageUrl> get images => throw _privateConstructorUsedError;
   @override
   LaunchDetails get details => throw _privateConstructorUsedError;
+  @override
+  SiteName get siteName => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$LaunchCopyWith<_Launch> get copyWith => throw _privateConstructorUsedError;

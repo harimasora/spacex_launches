@@ -72,3 +72,14 @@ class LaunchDetails extends ValueObject<String> {
 
   const LaunchDetails._(this.value);
 }
+
+class SiteName extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory SiteName(String input) {
+    return SiteName._(Either.right(input));
+  }
+
+  const SiteName._(this.value);
+}

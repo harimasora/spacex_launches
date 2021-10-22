@@ -28,7 +28,8 @@ class _$LaunchDTOTearOff {
       @DateTimeConverter() required DateTime launchDate,
       required List<String> images,
       required String patchUrl,
-      required String details}) {
+      required String details,
+      required String siteName}) {
     return _LaunchDTO(
       id: id,
       name: name,
@@ -37,6 +38,7 @@ class _$LaunchDTOTearOff {
       images: images,
       patchUrl: patchUrl,
       details: details,
+      siteName: siteName,
     );
   }
 
@@ -59,6 +61,7 @@ mixin _$LaunchDTO {
   List<String> get images => throw _privateConstructorUsedError;
   String get patchUrl => throw _privateConstructorUsedError;
   String get details => throw _privateConstructorUsedError;
+  String get siteName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -77,7 +80,8 @@ abstract class $LaunchDTOCopyWith<$Res> {
       @DateTimeConverter() DateTime launchDate,
       List<String> images,
       String patchUrl,
-      String details});
+      String details,
+      String siteName});
 }
 
 /// @nodoc
@@ -97,6 +101,7 @@ class _$LaunchDTOCopyWithImpl<$Res> implements $LaunchDTOCopyWith<$Res> {
     Object? images = freezed,
     Object? patchUrl = freezed,
     Object? details = freezed,
+    Object? siteName = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -127,6 +132,10 @@ class _$LaunchDTOCopyWithImpl<$Res> implements $LaunchDTOCopyWith<$Res> {
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
               as String,
+      siteName: siteName == freezed
+          ? _value.siteName
+          : siteName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -144,7 +153,8 @@ abstract class _$LaunchDTOCopyWith<$Res> implements $LaunchDTOCopyWith<$Res> {
       @DateTimeConverter() DateTime launchDate,
       List<String> images,
       String patchUrl,
-      String details});
+      String details,
+      String siteName});
 }
 
 /// @nodoc
@@ -165,6 +175,7 @@ class __$LaunchDTOCopyWithImpl<$Res> extends _$LaunchDTOCopyWithImpl<$Res>
     Object? images = freezed,
     Object? patchUrl = freezed,
     Object? details = freezed,
+    Object? siteName = freezed,
   }) {
     return _then(_LaunchDTO(
       id: id == freezed
@@ -195,6 +206,10 @@ class __$LaunchDTOCopyWithImpl<$Res> extends _$LaunchDTOCopyWithImpl<$Res>
           ? _value.details
           : details // ignore: cast_nullable_to_non_nullable
               as String,
+      siteName: siteName == freezed
+          ? _value.siteName
+          : siteName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -209,7 +224,8 @@ class _$_LaunchDTO extends _LaunchDTO {
       @DateTimeConverter() required this.launchDate,
       required this.images,
       required this.patchUrl,
-      required this.details})
+      required this.details,
+      required this.siteName})
       : super._();
 
   factory _$_LaunchDTO.fromJson(Map<String, dynamic> json) =>
@@ -231,10 +247,12 @@ class _$_LaunchDTO extends _LaunchDTO {
   final String patchUrl;
   @override
   final String details;
+  @override
+  final String siteName;
 
   @override
   String toString() {
-    return 'LaunchDTO(id: $id, name: $name, flightNumber: $flightNumber, launchDate: $launchDate, images: $images, patchUrl: $patchUrl, details: $details)';
+    return 'LaunchDTO(id: $id, name: $name, flightNumber: $flightNumber, launchDate: $launchDate, images: $images, patchUrl: $patchUrl, details: $details, siteName: $siteName)';
   }
 
   @override
@@ -257,7 +275,11 @@ class _$_LaunchDTO extends _LaunchDTO {
                 const DeepCollectionEquality()
                     .equals(other.patchUrl, patchUrl)) &&
             (identical(other.details, details) ||
-                const DeepCollectionEquality().equals(other.details, details)));
+                const DeepCollectionEquality()
+                    .equals(other.details, details)) &&
+            (identical(other.siteName, siteName) ||
+                const DeepCollectionEquality()
+                    .equals(other.siteName, siteName)));
   }
 
   @override
@@ -269,7 +291,8 @@ class _$_LaunchDTO extends _LaunchDTO {
       const DeepCollectionEquality().hash(launchDate) ^
       const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(patchUrl) ^
-      const DeepCollectionEquality().hash(details);
+      const DeepCollectionEquality().hash(details) ^
+      const DeepCollectionEquality().hash(siteName);
 
   @JsonKey(ignore: true)
   @override
@@ -290,7 +313,8 @@ abstract class _LaunchDTO extends LaunchDTO {
       @DateTimeConverter() required DateTime launchDate,
       required List<String> images,
       required String patchUrl,
-      required String details}) = _$_LaunchDTO;
+      required String details,
+      required String siteName}) = _$_LaunchDTO;
   const _LaunchDTO._() : super._();
 
   factory _LaunchDTO.fromJson(Map<String, dynamic> json) =
@@ -312,6 +336,8 @@ abstract class _LaunchDTO extends LaunchDTO {
   String get patchUrl => throw _privateConstructorUsedError;
   @override
   String get details => throw _privateConstructorUsedError;
+  @override
+  String get siteName => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$LaunchDTOCopyWith<_LaunchDTO> get copyWith =>

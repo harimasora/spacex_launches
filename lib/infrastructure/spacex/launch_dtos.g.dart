@@ -17,6 +17,7 @@ _$_LaunchDTO _$$_LaunchDTOFromJson(Map<String, dynamic> json) => _$_LaunchDTO(
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       patchUrl: json['patchUrl'] as String,
       details: json['details'] as String,
+      siteName: json['siteName'] as String,
     );
 
 Map<String, dynamic> _$$_LaunchDTOToJson(_$_LaunchDTO instance) =>
@@ -29,4 +30,5 @@ Map<String, dynamic> _$$_LaunchDTOToJson(_$_LaunchDTO instance) =>
       'images': instance.images,
       'patchUrl': instance.patchUrl,
       'details': instance.details,
+      'siteName': instance.siteName,
     };

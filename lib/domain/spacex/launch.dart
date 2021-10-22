@@ -14,6 +14,7 @@ class Launch with _$Launch {
     required ImageUrl patchUrl,
     required List<ImageUrl> images,
     required LaunchDetails details,
+    required SiteName siteName,
   }) = _Launch;
 
   const Launch._();

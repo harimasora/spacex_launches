@@ -15,6 +15,7 @@ class LaunchDTO with _$LaunchDTO {
     required List<String> images,
     required String patchUrl,
     required String details,
+    required String siteName,
   }) = _LaunchDTO;
 
   const LaunchDTO._();
@@ -28,6 +29,7 @@ class LaunchDTO with _$LaunchDTO {
       'images': json['links']['flickr_images'],
       'patchUrl': json['links']['mission_patch_small'] ?? '',
       'details': json['details'] ?? '',
+      'siteName': json['launch_site']['site_name'] ?? '',
     };
     return LaunchDTO.fromJson(simplifiedJson);
   }
@@ -42,6 +44,7 @@ class LaunchDTO with _$LaunchDTO {
         images: images.map((e) => ImageUrl(e)).toList(),
         patchUrl: ImageUrl(patchUrl),
         details: LaunchDetails(details),
+        siteName: SiteName(siteName),
       );
 }
 
